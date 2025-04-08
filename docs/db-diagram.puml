@@ -1,0 +1,24 @@
+@startuml db-diagram
+!theme plain
+
+entity "Users" {
+  id : UUID <<PK>> <<NOT NULL>>
+  email : STRING <<NOT NULL>>
+  password : STRING <<NOT NULL>>
+  createdAt : DATE <<NOT NULL>>
+  updatedAt : DATE <<NOT NULL>>
+}
+
+entity "Books" {
+  id : UUID <<PK>> <<NOT NULL>>
+  title : STRING <<NOT NULL>>
+  author : STRING <<NOT NULL>>
+  category : STRING <<NOT NULL>>
+  price : DECIMAL <<NOT NULL>>
+  rating : DECIMAL <<NOT NULL>>
+  publishedDate : DATE <<NOT NULL>>
+  createdAt : DATE <<NOT NULL>>
+  updatedAt : DATE <<NOT NULL>>
+}
+
+@enduml
