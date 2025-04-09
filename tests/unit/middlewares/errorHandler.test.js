@@ -56,7 +56,7 @@ describe('Error Handler Middleware', () => {
 
   test('should use "Internal Server Error" if no message on error', () => {
     const error = new Error();
-    error.message = ''; // Empty message
+    error.message = '';
     
     errorHandler(error, req, res, next);
     expect(res.status).toHaveBeenCalledWith(500);

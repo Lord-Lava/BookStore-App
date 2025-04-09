@@ -6,7 +6,7 @@ const BookDto = require('../../../src/dtos/response/BookDto');
 const AuthResponseDto = require('../../../src/dtos/response/AuthResponseDto');
 const ErrorResponseDto = require('../../../src/dtos/response/ErrorResponseDto');
 
-// Mock the DTOs
+
 jest.mock('../../../src/dtos/request/CreateBookDto');
 jest.mock('../../../src/dtos/request/UserSignupDto');
 jest.mock('../../../src/dtos/request/UserLoginDto');

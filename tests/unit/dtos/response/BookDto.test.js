@@ -14,10 +14,10 @@ describe('BookDto', () => {
   };
 
   test('should create a DTO from a model', () => {
-    // Act
+
     const dto = BookDto.fromModel(bookModel);
     
-    // Assert
+
     expect(dto.id).toBe(bookModel.id);
     expect(dto.title).toBe(bookModel.title);
     expect(dto.author).toBe(bookModel.author);
@@ -26,25 +26,25 @@ describe('BookDto', () => {
     expect(dto.rating).toBe(bookModel.rating);
     expect(dto.publishedDate).toBe(bookModel.publishedDate);
     
-    // Should not include these fields
+
     expect(dto.createdAt).toBeUndefined();
     expect(dto.updatedAt).toBeUndefined();
   });
 
   test('should convert an array of models to an array of DTOs', () => {
-    // Arrange
+
     const models = [bookModel, {...bookModel, id: '456', title: 'Second Book'}];
     
-    // Act
+
     const dtos = BookDto.fromModelArray(models);
     
-    // Assert
+
     expect(dtos).toHaveLength(2);
     expect(dtos[0].id).toBe('123');
     expect(dtos[1].id).toBe('456');
     expect(dtos[1].title).toBe('Second Book');
     
-    // Should not include these fields
+
     expect(dtos[0].createdAt).toBeUndefined();
     expect(dtos[1].updatedAt).toBeUndefined();
   });

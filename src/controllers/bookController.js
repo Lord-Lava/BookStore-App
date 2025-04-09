@@ -1,11 +1,8 @@
-/**
- * Book Controller
- * Handles book CRUD operations
- */
+
 const { Book } = require('../models');
 const { Op } = require('sequelize');
 
-// Import DTOs
+
 const CreateBookDto = require('../dtos/request/CreateBookDto');
 const BookDto = require('../dtos/response/BookDto');
 const ErrorResponseDto = require('../dtos/response/ErrorResponseDto');
@@ -65,7 +62,7 @@ const createBook = async (req, res, next) => {
       return res.status(400).json(ErrorResponseDto.validationError(error.details));
     }
     
-    // Convert DTO to model and create book
+
     const bookDto = new CreateBookDto(value);
     const book = await Book.create(bookDto.toModel());
     
@@ -143,7 +140,7 @@ const getAllBooks = async (req, res, next) => {
   try {
     const { author, category, rating, title, page = 1, limit = 10, sortBy, order = 'ASC' } = req.query;
     
-    // Build filter condition
+
     const whereCondition = {};
     
     if (author) {
@@ -164,21 +161,21 @@ const getAllBooks = async (req, res, next) => {
       };
     }
     
-    // Build order options
+
     const orderOptions = [];
     
-    // Restrict sorting to only price and rating
+
     if (sortBy) {
-      // Only allow sorting by price or rating
+
       if (['price', 'rating'].includes(sortBy.toLowerCase())) {
         orderOptions.push([sortBy, order.toUpperCase()]);
       }
     }
     
-    // Calculate pagination
+
     const offset = (page - 1) * limit;
     
-    // Find books
+
     const { count, rows: books } = await Book.findAndCountAll({
       where: whereCondition,
       order: orderOptions,
@@ -186,7 +183,7 @@ const getAllBooks = async (req, res, next) => {
       offset: parseInt(offset)
     });
     
-    // Transform models to DTOs
+
     const bookDtos = BookDto.fromModelArray(books);
     
     res.json({

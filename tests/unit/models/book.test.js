@@ -30,15 +30,15 @@ describe('Book Model', () => {
         allowNull: false
       },
       price: {
-        type: 'DECIMAL', // We'd check this is DECIMAL(10,2) in a real test
+        type: 'DECIMAL',
         allowNull: false
       },
       rating: {
-        type: 'DECIMAL', // We'd check this is DECIMAL(3,1) in a real test
+        type: 'DECIMAL',
         allowNull: false,
         validate: {
-          min: 0, // Should validate minimum rating
-          max: 5  // Should validate maximum rating
+          min: 0,
+          max: 5
         }
       },
       publishedDate: {

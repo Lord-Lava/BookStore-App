@@ -56,7 +56,7 @@ describe('UserSignupDto', () => {
   test('should reject data with password that is too short', () => {
     const invalidData = {
       email: 'test@example.com',
-      password: '12345' // Less than 6 characters
+      password: '12345'
     };
     
     const { error } = UserSignupDto.validate(invalidData);

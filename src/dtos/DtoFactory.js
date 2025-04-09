@@ -1,20 +1,16 @@
-/**
- * DTO Factory
- * Provides convenient methods to create and transform DTOs
- */
 
-// Import request DTOs
+
 const CreateBookDto = require('./request/CreateBookDto');
 const UserSignupDto = require('./request/UserSignupDto');
 const UserLoginDto = require('./request/UserLoginDto');
 
-// Import response DTOs
+
 const BookDto = require('./response/BookDto');
 const AuthResponseDto = require('./response/AuthResponseDto');
 const ErrorResponseDto = require('./response/ErrorResponseDto');
 
 class DtoFactory {
-  // Create a request DTO from data
+
   static createRequest(type, data) {
     switch (type) {
       case 'createBook':
@@ -28,7 +24,7 @@ class DtoFactory {
     }
   }
 
-  // Validate request data
+
   static validate(type, data) {
     switch (type) {
       case 'createBook':
@@ -42,7 +38,7 @@ class DtoFactory {
     }
   }
 
-  // Transform a model to a response DTO
+
   static createResponse(type, model, options = {}) {
     switch (type) {
       case 'book':
@@ -58,7 +54,7 @@ class DtoFactory {
     }
   }
 
-  // Create predefined error responses
+
   static error = {
     validation: (details) => ErrorResponseDto.validationError(details),
     notFound: (resource) => ErrorResponseDto.notFound(resource),

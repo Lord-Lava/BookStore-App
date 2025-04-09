@@ -1,9 +1,6 @@
-/**
- * Bookstore API Server
- * A RESTful API for a Bookstore Application
- */
 
-// Dependencies
+
+
 const express = require('express');
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -13,25 +10,25 @@ const util = require('util');
 const execPromise = util.promisify(exec);
 require('dotenv').config();
 
-// Import routes
+
 const userRoutes = require('./src/routes/userRoutes');
 const bookRoutes = require('./src/routes/bookRoutes');
 
-// Import database
+
 const { sequelize } = require('./src/models');
 
-// Import error handler
+
 const { errorHandler } = require('./src/middlewares/errorHandler');
 
-// Environment configuration
+
 const PORT = process.env.PORT;
 const NODE_ENV = process.env.NODE_ENV;
 const isDev = NODE_ENV === 'development';
 
-// Create Express app
+
 const app = express();
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -60,7 +57,7 @@ app.get('/', (_req, res) => {
   res.json({ message: 'Bookstore API is running', environment: NODE_ENV });
 });
 
-// Setup Swagger documentation
+
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -95,7 +92,7 @@ const swaggerOptions = {
     ]
   },
   apis: [
-    // Using absolute paths to ensure files are found
+
     `${__dirname}/src/routes/*.js`,
     `${__dirname}/src/controllers/*.js`,
     `${__dirname}/src/models/*.js`,
@@ -105,7 +102,7 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// Configure Swagger UI with options to display authorization
+
 const swaggerUiOptions = {
   explorer: true,
   swaggerOptions: {
@@ -125,16 +122,14 @@ const swaggerUiOptions = {
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, swaggerUiOptions));
 
-// Routes
+
 app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
 
-// Global error handler
+
 app.use(errorHandler);
 
-/**
- * Run database migrations and seeders
- */
+
 async function runMigrations() {
   try {
     console.log('Running database migrations...');
@@ -156,17 +151,14 @@ async function runMigrations() {
   }
 }
 
-/**
- * Initialize the server
- * Connect to database and start listening
- */
+
 async function startServer() {
   try {
-    // Test database connection
+
     await sequelize.authenticate();
     console.log('Database connection established successfully');
     
-    // Run migrations instead of sync
+
     const migrationsSuccess = await runMigrations();
     if (!migrationsSuccess && isDev) {
       console.log('Falling back to sync for development...');
@@ -174,7 +166,7 @@ async function startServer() {
       console.log('Database synced directly (fallback mode)');
     }
     
-    // Start the server
+
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
       console.log(`API Documentation: http://localhost:${PORT}/api-docs`);
@@ -186,15 +178,4 @@ async function startServer() {
   }
 }
 
-/**
- * The application follows clean architecture principles:
- * - Models (src/models): Database entities and business logic
- * - Controllers (src/controllers): Request handlers and business operations
- * - Routes (src/routes): API endpoint definitions
- * - Middlewares (src/middlewares): Authentication, validation, and error handling
- * - Migrations (src/migrations): Database schema changes
- * - Seeders (src/seeders): Sample data for development/testing
- */
-
-// Start the server
 startServer();

@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+dist/
+build/
+coverage/
+.nyc_output/
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Temporary files
+tmp/
+temp/
+
+# Docker
+docker-volumes/
+
+# Database files
+*.sqlite
+*.db
+
+# Testing artifacts
+.coverage/
+cypress/videos/
+cypress/screenshots/
