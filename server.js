@@ -56,7 +56,7 @@ app.use(express.urlencoded({ extended: true }));
  *                 environment:
  *                   type: string
  */
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({ message: 'Bookstore API is running', environment: NODE_ENV });
 });
 
